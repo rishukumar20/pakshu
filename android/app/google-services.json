@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "599023505640",
+    "project_id": "pakshu-608ed",
+    "storage_bucket": "pakshu-608ed.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599023505640:android:feb157ff1fede06d0a395d",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR2jrZhXx20XcUlF4r_ApysITAKuWDkd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599023505640:android:03369dc297f3c1c30a395d",
+        "android_client_info": {
+          "package_name": "com.example.pakshu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR2jrZhXx20XcUlF4r_ApysITAKuWDkd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599023505640:android:5f5903144deb4a1a0a395d",
+        "android_client_info": {
+          "package_name": "com.example.paskshu"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBR2jrZhXx20XcUlF4r_ApysITAKuWDkd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
