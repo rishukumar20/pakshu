@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:pakshu/screens/signupScreen.dart';
+import 'package:pakshu/screens/login_screen.dart';
 import 'package:pakshu/screens/homepage.dart';
-import 'package:pakshu/screens/notification_services.dart';
+import 'package:pakshu/screens/signupScreen.dart';  
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +15,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  print("connected");
+  // print("connected");
 
   runApp(MyApp());
 }
@@ -32,15 +32,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      routes: {
-        '/home': (context) => SignUpScreen(),
-        '/': (context) => HomePage(),
-        // '/notifications': (context) => NotificationsScreen(),
-      },
+      title: 'Pakshu',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: const SignupScreen(),
     );
   }
 }
+

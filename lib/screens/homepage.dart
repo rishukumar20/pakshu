@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import './time_tracker.dart';
 import './notification_services.dart';
 import './reading.dart';
+import './timer_homepage.dart';
+
 
 
 // Define pages for each tracker
@@ -62,7 +61,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tracker'),
+        title: Text('Lets track it!'),
         actions: [
           IconButton(
             icon: Icon(Icons.account_circle),
@@ -113,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => TimeTrackerScreen()),
+                                builder: (context) => TimerHomePage()),
                           );
                           break;
                         case 1:
