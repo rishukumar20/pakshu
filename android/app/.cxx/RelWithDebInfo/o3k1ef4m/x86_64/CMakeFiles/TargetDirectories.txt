@@ -1,0 +1,2 @@
+C:/Users/Rishu/StudioProjects/Pakshu/android/app/.cxx/RelWithDebInfo/o3k1ef4m/x86_64/CMakeFiles/edit_cache.dir
+C:/Users/Rishu/StudioProjects/Pakshu/android/app/.cxx/RelWithDebInfo/o3k1ef4m/x86_64/CMakeFiles/rebuild_cache.dir

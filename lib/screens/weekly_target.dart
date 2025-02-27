@@ -11,6 +11,7 @@ class WeeklyPlanScreen extends StatefulWidget {
 class _WeeklyPlanScreenState extends State<WeeklyPlanScreen> {
   DateTimeRange? _dateRange;
   final List<Map<String, dynamic>> _todos = [];
+  final List<Map<String, dynamic>> _completedPlans = [];
   final _firestore = FirebaseFirestore.instance;
 
   // Save locally using SharedPreferences
@@ -63,6 +64,19 @@ class _WeeklyPlanScreenState extends State<WeeklyPlanScreen> {
     _loadFromLocal();
   }
 
+  // Add Weekly Target
+  void _addWeeklyTarget() {
+    final today = DateTime.now();
+    final nextWeek = today.add(Duration(days: 6));
+    setState(() {
+      _dateRange = DateTimeRange(start: today, end: nextWeek);
+    });
+    _saveLocally();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text('Weekly Target set: $today to $nextWeek')),
+    );
+  }
+
   // Add To-Do Dialog
   void _addTodo() {
     showDialog(
@@ -98,7 +112,30 @@ class _WeeklyPlanScreenState extends State<WeeklyPlanScreen> {
   void _toggleTodoCompletion(int index) {
     setState(() {
       _todos[index]['completed'] = !_todos[index]['completed'];
+      if (_todos.every((todo) => todo['completed'] == true)) {
+        _addCompletedPlan();
+      }
     });
+    _saveLocally();
+  }
+
+  // Add Completed Plan
+  void _addCompletedPlan() {
+    final totalTodos = _todos.length;
+    final completedTodos = _todos.where((todo) => todo['completed'] == true).length;
+    final ratio = totalTodos > 0 ? (completedTodos / totalTodos) : 0.0;
+
+    setState(() {
+      _completedPlans.add({
+        'dateRange': _dateRange,
+        'totalTodos': totalTodos,
+        'completedTodos': completedTodos,
+        'ratio': ratio,
+      });
+      _todos.clear();
+      _dateRange = null;
+    });
+
     _saveLocally();
   }
 
@@ -124,6 +161,12 @@ class _WeeklyPlanScreenState extends State<WeeklyPlanScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
+            // Weekly Target Button
+            ElevatedButton(
+              onPressed: _addWeeklyTarget,
+              child: Text('Add Weekly Target'),
+            ),
+            SizedBox(height: 16),
             // Date Range Picker
             ElevatedButton(
               onPressed: () async {
@@ -169,11 +212,32 @@ class _WeeklyPlanScreenState extends State<WeeklyPlanScreen> {
                 },
               ),
             ),
-            // Add To-Do Button
             ElevatedButton(
               onPressed: _addTodo,
               child: Text('Add To-Do'),
             ),
+            SizedBox(height: 16),
+            // Completed Weekly Plans
+            if (_completedPlans.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: _completedPlans.length,
+                  itemBuilder: (ctx, index) {
+                    final plan = _completedPlans[index];
+                    return Card(
+                      child: ListTile(
+                        title: Text(
+                          'Week: ${plan['dateRange'].start.toLocal()} - ${plan['dateRange'].end.toLocal()}',
+                        ),
+                        subtitle: Text(
+                          'Todos: ${plan['completedTodos']}/${plan['totalTodos']} '
+                          '(Ratio: ${(plan['ratio'] * 100).toStringAsFixed(1)}%)',
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
           ],
         ),
       ),

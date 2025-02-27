@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Pakshu',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const SignupScreen(),
+      home: const HomePage(),
     );
   }
 }
